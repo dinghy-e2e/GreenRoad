@@ -11,9 +11,9 @@
 
 Aws premmision:
 
-```bash
+```sh
 aws configure
-
+```
 $ aws configure
 
 Terraform commands:
