@@ -1,27 +1,22 @@
-#! /bin/bash -xe
+#!/bin/bash -xe
 
-# Check if the script is being run as root
 if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root."
-    exit 1
+  echo "This script must be run as root."
+  exit 1
 fi
 
-# Add the user to the sudo group
-usermod -aG sudo ubuntu
-
-echo "User 'ubuntu' has been granted root privileges."
-
-#output log
+# Output log
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
 # Install k8s
-usermod -g 0 -o ubuntu
 
 apt update && apt upgrade -y
 
 curl -sfL https://get.k3s.io | sh -
 
-# install helm
+# export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
+# Install helm
 
 wget https://get.helm.sh/helm-v3.9.3-linux-amd64.tar.gz
 
@@ -31,18 +26,22 @@ mv linux-amd64/helm /usr/local/bin
 
 rm helm*
 
-# install Services(Prometheus,Node exporter Grafana, 2048 game)
+# Install Services (Prometheus, Node exporter, Grafana, 2048 game)
 
 kubectl create ns greenroad
 
-kubectl config view --raw >~/.kube/config
 
-# 2048 
+# 2048
+git clone https://github.com/dinghy-e2e/GreenRoad.git
 
-kubectl apply -f /home/ubuntu/2048.yaml 
+kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/2048.yaml
 
-# monitoring helm
+# Monitoring install 
 
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+# cheking url
+public_ip=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 
-helm install monitor-stack prometheus-community/kube-prometheus-stack --namespace greenroad
+# fix url
+sed -i "s/public_ip/$public_ip/g" /GreenRoad/GreenRoad-Home-Assignment/OPS/prometheus-stack.yaml
+
+kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/prometheus-stack.yaml
