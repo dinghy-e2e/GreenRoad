@@ -27,10 +27,10 @@ curl -sfL https://get.k3s.io | sh -
 kubectl create ns greenroad
 
 
-#//// 2048 ////#
+#//// keycloak ////#
 git clone https://github.com/dinghy-e2e/GreenRoad.git
 
-kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/2048.yaml
+kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/keycloak.yaml
 
 #//// Monitoring install ///#
 
