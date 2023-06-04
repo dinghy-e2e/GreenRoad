@@ -55,10 +55,10 @@ data:
       - job_name: 'prometheus'
         static_configs:
           - targets: ['public_ip:30001']
-      - job_name: 'itay-2048'
+      - job_name: 'your-application'
+        metrics_path: /
         static_configs:
           - targets: ['public_ip:31234']
-            metrics_path: /
 
 ---
 
@@ -149,3 +149,19 @@ spec:
         - name: grafana-dashboards
           configMap:
             name: grafana-dashboards
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: greenroad
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30002
+  selector:
+    app: grafana
