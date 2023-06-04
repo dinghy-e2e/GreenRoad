@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: monitoring
+  name: greenroad
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -16,7 +16,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: prometheus-k8s
-  namespace: monitoring
+  namespace: greenroad
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -42,7 +42,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: prometheus-k8s
-  namespace: monitoring
+  namespace: greenroad
 ---
 apiVersion: v1
 data:
@@ -248,13 +248,13 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: alertmanager-templates
-  namespace: monitoring
+  namespace: greenroad
 ---
 kind: ConfigMap
 apiVersion: v1
 metadata:
   name: alertmanager
-  namespace: monitoring
+  namespace: greenroad
 data:
   config.yml: |-
     global:
@@ -337,7 +337,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: alertmanager
-  namespace: monitoring
+  namespace: greenroad
 spec:
   replicas: 1
   selector:
@@ -384,7 +384,7 @@ metadata:
   labels:
     name: alertmanager
   name: alertmanager
-  namespace: monitoring
+  namespace: greenroad
 spec:
   selector:
     app: alertmanager
@@ -399,7 +399,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana-core
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: grafana
     component: core
@@ -695,7 +695,7 @@ data:
             "thresholdLabels": false
           }
         }, {
-          "content": "<img src=\"http://prometheus.io/assets/prometheus_logo_grey.svg\" alt=\"Prometheus logo\" style=\"height: 40px;\">\n<span style=\"font-family: 'Open Sans', 'Helvetica Neue', Helvetica; font-size: 25px;vertical-align: text-top;color: #bbbfc2;margin-left: 10px;\">Prometheus</span>\n\n<p style=\"margin-top: 10px;\">You're using Prometheus, an open-source systems monitoring and alerting toolkit originally built at SoundCloud. For more information, check out the <a href=\"http://www.grafana.org/\">Grafana</a> and <a href=\"http://prometheus.io/\">Prometheus</a> projects.</p>",
+          "content": "<img src=\"http://prometheus.io/assets/prometheus_logo_grey.svg\" alt=\"Prometheus logo\" style=\"height: 40px;\">\n<span style=\"font-family: 'Open Sans', 'Helvetica Neue', Helvetica; font-size: 25px;vertical-align: text-top;color: #bbbfc2;margin-left: 10px;\">Prometheus</span>\n\n<p style=\"margin-top: 10px;\">You're using Prometheus, an open-source systems greenroad and alerting toolkit originally built at SoundCloud. For more information, check out the <a href=\"http://www.grafana.org/\">Grafana</a> and <a href=\"http://prometheus.io/\">Prometheus</a> projects.</p>",
           "editable": true,
           "error": false,
           "id": 9,
@@ -2300,13 +2300,13 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: grafana-import-dashboards
-  namespace: monitoring
+  namespace: greenroad
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: grafana-import-dashboards
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: grafana
     component: import-dashboards
@@ -2387,7 +2387,7 @@ spec:
 # kind: Ingress
 # metadata:
 #   name: grafana
-#   namespace: monitoring
+#   namespace: greenroad
 # spec:
 #   rules:
 #   - host: <yourchoice>.<cluster-id>.k8s.gigantic.io
@@ -2405,14 +2405,14 @@ data:
   admin-username: YWRtaW4=
 metadata:
   name: grafana
-  namespace: monitoring
+  namespace: greenroad
 type: Opaque
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: grafana
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: grafana
     component: core
@@ -2420,6 +2420,7 @@ spec:
   type: NodePort
   ports:
     - port: 3000
+      nodePort: 30002
   selector:
     app: grafana
     component: core
@@ -2447,6 +2448,12 @@ data:
             regex: '(.*):10250'
             replacement: '${1}:10255'
             target_label: __address__
+
+      - job_name: website-greenroad
+      metrics_path: /metrics
+      static_configs:
+      - targets:
+          - http://ec2-54-91-165-100.compute-1.amazonaws.com:31234
 
       # https://github.com/prometheus/prometheus/blob/master/documentation/examples/prometheus-kubernetes.yml#L79
       - job_name: 'kubernetes-endpoints'
@@ -2553,13 +2560,13 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: prometheus-core
-  namespace: monitoring
+  namespace: greenroad
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus-core
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: prometheus
     component: core
@@ -2611,7 +2618,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-state-metrics
-  namespace: monitoring
+  namespace: greenroad
   labels: 
     app: kube-state-metrics
 spec:
@@ -2643,7 +2650,7 @@ spec:
 # subjects:
 # - kind: ServiceAccount
 #   name: kube-state-metrics
-#   namespace: monitoring
+#   namespace: greenroad
 # ---
 # apiVersion: rbac.authorization.k8s.io/v1beta1
 # kind: ClusterRole
@@ -2670,7 +2677,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: kube-state-metrics
-  namespace: monitoring
+  namespace: greenroad
 ---
 apiVersion: v1
 kind: Service
@@ -2678,7 +2685,7 @@ metadata:
   annotations:
     prometheus.io/scrape: 'true'
   name: kube-state-metrics
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: kube-state-metrics
 spec:
@@ -2694,7 +2701,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: node-directory-size-metrics
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: node-directory-size-metrics
   annotations:
@@ -2771,7 +2778,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: prometheus-node-exporter
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: prometheus
     component: node-exporter
@@ -2803,7 +2810,7 @@ metadata:
   annotations:
     prometheus.io/scrape: 'true'
   name: prometheus-node-exporter
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: prometheus
     component: node-exporter
@@ -2888,13 +2895,13 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: prometheus-rules
-  namespace: monitoring
+  namespace: greenroad
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: prometheus
-  namespace: monitoring
+  namespace: greenroad
   labels:
     app: prometheus
     component: core
@@ -2906,6 +2913,7 @@ spec:
     - port: 9090
       protocol: TCP
       name: webui
+      nodePort: 30001
   selector:
     app: prometheus
     component: core
