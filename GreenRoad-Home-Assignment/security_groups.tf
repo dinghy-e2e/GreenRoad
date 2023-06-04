@@ -11,8 +11,15 @@ resource "aws_security_group" "itay-zrihan-sg-ec2-instance" {
   }
 
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = 30001
+    to_port     = 30001
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  ingress {
+    from_port   = 30002
+    to_port     = 30002
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
