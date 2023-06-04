@@ -54,11 +54,11 @@ data:
     scrape_configs:
       - job_name: 'prometheus'
         static_configs:
-          - targets: ['localhost:9090']
-      - job_name: 'your-application'
+          - targets: ['public_ip:30001']
+      - job_name: 'itay-2048'
         metrics_path: /
         static_configs:
-          - targets: ['your-application-service:80']
+          - targets: ['public_ip:31234']
 
 ---
 
