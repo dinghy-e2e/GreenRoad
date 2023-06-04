@@ -54,10 +54,66 @@ data:
     scrape_configs:
       - job_name: 'prometheus'
         static_configs:
-          - targets: ['localhost:9090']
-      - job_name: '2048-game-app'
+          - targets: ['public_ip:30001']
+      - job_name: 'your-application'
         static_configs:
           - targets: ['public_ip:31234'] # Replace with your application service name and port
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: greenroad
+spec:
+  type: NodePort
+  ports:
+    - port: 9090
+      targetPort: 9090
+      nodePort: 30001
+  selector:
+    app: prometheus
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  namespace: greenroad
+data:
+  web-status-dashboard.json: |
+    {
+      "dashboard": {
+        "id": null,
+        "title": "Web Status",
+        "panels": [
+          {
+            "title": "HTTP Status Code",
+            "type": "graph",
+            "datasource": "Prometheus",
+            "targets": [
+              {
+                "expr": "http_status_code",
+                "legendFormat": "Status Code"
+              }
+            ],
+            "yaxes": [
+              {
+                "format": "short"
+              },
+              {}
+            ]
+          }
+        ],
+        "refresh": "10s",
+        "schemaVersion": 22,
+        "version": 0
+      },
+      "folderId": null,
+      "overwrite": false
+    }
 
 ---
 
@@ -84,38 +140,5 @@ spec:
           volumeMounts:
             - name: grafana-storage
               mountPath: /var/lib/grafana
-      volumes:
-        - name: grafana-storage
-          emptyDir: {}
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: grafana
-  namespace: greenroad
-spec:
-  type: NodePort
-  ports:
-    - port: 80
-      targetPort: 3000
-      nodePort: 30002
-  selector:
-    app: grafana
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: prometheus
-  namespace: greenroad
-spec:
-  type: NodePort
-  ports:
-    - port: 9090
-      targetPort: 9090
-      nodePort: 30001
-  selector:
-    app: prometheus
+            - name: grafana-dashboards
+              mountPath: /etc/grafana/dashboards
