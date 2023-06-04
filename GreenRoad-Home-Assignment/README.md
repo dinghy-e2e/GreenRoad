@@ -1,5 +1,5 @@
 
-### Prerequisites
+# Prerequisites
 
 - AWS cli configured
 - Terraform installed
@@ -7,7 +7,7 @@
 
 
 
-### Terraform Steps : 
+# Terraform Steps : 
 
 Aws premmision:
 
@@ -21,7 +21,7 @@ $ terraform init
 
 Run plan
 
-# terraform plan
+$ terraform plan
 
 After verify Resources: 18 added, 0 changed, 0 destroyed
 
