@@ -55,9 +55,10 @@ data:
       - job_name: 'prometheus'
         static_configs:
           - targets: ['public_ip:30001']
-      - job_name: 'your-application'
+      - job_name: 'itay-2048'
         static_configs:
-          - targets: ['public_ip:31234'] # Replace with your application service name and port
+          - targets: ['public_ip:31234']
+            metrics_path: /
 
 ---
 
@@ -142,3 +143,9 @@ spec:
               mountPath: /var/lib/grafana
             - name: grafana-dashboards
               mountPath: /etc/grafana/dashboards
+      volumes:
+        - name: grafana-storage
+          emptyDir: {}
+        - name: grafana-dashboards
+          configMap:
+            name: grafana-dashboards
