@@ -4,8 +4,8 @@ resource "aws_security_group" "itay-zrihan-sg-ec2-instance" {
   vpc_id      = aws_vpc.itay-zrihan-vpc.id
 
   ingress {
-    from_port   = 443
-    to_port     = 443
+    from_port   = 31234
+    to_port     = 31234
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
