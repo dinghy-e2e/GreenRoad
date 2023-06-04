@@ -32,7 +32,7 @@ $ terraform apply -auto-approve
 ```
 Apply complete result:
 
-![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/ccad42dc-d45a-42bf-9ff3-49e56eb34010)
+![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/be5a8055-4961-4637-9d43-d6764daee5a2)
 
 Note:
 if you want to use SSH you need to create pem file with terraform cmd
