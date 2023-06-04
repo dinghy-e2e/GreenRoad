@@ -28,7 +28,7 @@ terraform plan
 After verify Resources: 18 added, 0 changed, 0 destroyed
 
 ```sh
-$ terraform apply -auto-approve
+terraform apply -auto-approve
 ```
 Apply complete result:
 
