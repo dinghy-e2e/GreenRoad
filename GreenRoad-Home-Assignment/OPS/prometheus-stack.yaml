@@ -55,7 +55,7 @@ data:
       - job_name: 'prometheus'
         static_configs:
           - targets: ['public_ip:30001']
-      - job_name: 'itay-2048'
+      - job_name: 'itay'
         metrics_path: /
         static_configs:
           - targets: ['public_ip:31234']
