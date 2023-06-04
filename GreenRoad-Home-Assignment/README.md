@@ -12,7 +12,7 @@
 Aws premmision:
 
 ```bash
-# $ aws configure
+aws configure
 ```
 $ aws configure
 
