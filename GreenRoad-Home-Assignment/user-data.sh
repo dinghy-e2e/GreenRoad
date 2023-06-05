@@ -38,4 +38,6 @@ kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/2048.yaml
 public_ip=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 sed -i "s/public_ip/$public_ip/g" /GreenRoad/GreenRoad-Home-Assignment/OPS/prometheus-stack.yaml
 
+kubectl create configmap -n greenroad grafana-dashboards --from-file=/GreenRoad/GreenRoad-Home-Assignment/OPS/dashboard.json
+
 kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/prometheus-stack.yaml
