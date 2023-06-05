@@ -90,6 +90,12 @@ ssh -i keypair.pem ubuntu@<public_dns>
 ```sh
  sudo kubectl -n kubernetes-dashboard create token admin-user
 ```
+
+
+![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/f6a2319e-7f28-433e-92ba-de245cc3c4cc)
+
+- Go to kubernetes dashboard page, paste the token and login :)
+
 ![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/ae5313a7-c449-4c9b-9418-67b7609c4982)
 
 
