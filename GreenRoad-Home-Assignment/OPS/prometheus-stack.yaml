@@ -81,6 +81,46 @@ spec:
 
 ---
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-exporter
+  namespace: greenroad
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-exporter
+  template:
+    metadata:
+      labels:
+        app: node-exporter
+    spec:
+      containers:
+        - name: node-exporter
+          image: prom/node-exporter:v1.2.2
+          ports:
+            - containerPort: 9100
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-exporter
+  namespace: greenroad
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 9100
+      targetPort: 9100
+      nodePort: 30003
+  selector:
+    app: node-exporter
+
+---
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
