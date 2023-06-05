@@ -77,7 +77,7 @@ data:
           - source_labels: [__param_target]
             target_label: instance
           - target_label: __address__
-            replacement: 127.0.0.1:9115
+            replacement: public_ip:30004
 
 ---
 
