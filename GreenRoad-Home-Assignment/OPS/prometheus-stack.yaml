@@ -62,6 +62,9 @@ data:
       - job_name: 'node'
         static_configs:
           - targets: ['public_ip:30003']
+      - job_name: 'kube-state-metrics'
+        static_configs:
+          - targets: ['public_ip:30004']
 
 ---
 
@@ -118,6 +121,46 @@ spec:
       nodePort: 30003
   selector:
     app: node-exporter
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-state-metrics
+  namespace: greenroad
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-state-metrics
+  template:
+    metadata:
+      labels:
+        app: kube-state-metrics
+    spec:
+      containers:
+        - name: kube-state-metrics
+          image: quay.io/coreos/kube-state-metrics:v1.9.8
+          ports:
+            - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-state-metrics
+  namespace: greenroad
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      nodePort: 30004
+  selector:
+    app: kube-state-metrics
 
 ---
 
