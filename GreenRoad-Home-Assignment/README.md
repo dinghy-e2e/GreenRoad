@@ -43,6 +43,13 @@ Create token for login
 ```
 ![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/ae5313a7-c449-4c9b-9418-67b7609c4982)
 
+Clean up option
+
+```sh
+kubectl -n kubernetes-dashboard delete serviceaccount admin-user
+kubectl -n kubernetes-dashboard delete clusterrolebinding admin-user
+```
+
 Note:
 if you want to use SSH you need to create pem file with terraform cmd
 
