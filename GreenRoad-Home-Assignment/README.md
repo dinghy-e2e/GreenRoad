@@ -68,7 +68,7 @@ chomd 400 keypair.pem
 ssh -i keypair.pem ubuntu@<public_dns>
 ```
 - We can copy the public dns ip from terrafrom terminal or aws ui
-- 
+
 ![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/3ce43bb0-54f5-4c64-a540-d266be59c0f9)
 
 - Create dashboard token
