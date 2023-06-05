@@ -68,6 +68,7 @@ data:
           module: [http_2xx]
         static_configs:
           - targets:
+            - http://public_ip:31234
             - http://prometheus.io
             - https://prometheus.io
             - http://public_ip:30004
