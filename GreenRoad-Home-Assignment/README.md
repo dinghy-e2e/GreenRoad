@@ -11,7 +11,7 @@
 
 Clone Iac repo
 
-``sh
+```sh
 git clone https://github.com/dinghy-e2e/GreenRoad.git
 ```
 Navigate to GreenRoad\GreenRoad-Home-Assignment
