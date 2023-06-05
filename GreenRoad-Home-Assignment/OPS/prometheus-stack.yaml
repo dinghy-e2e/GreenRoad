@@ -182,7 +182,7 @@ metadata:
   name: grafana-dashboards
   namespace: greenroad
 data:
-  web-status-dashboard.json: |-
+  dashboard.json: |-
     {{- if .Files.Exists "dashboard.json" }}
     {{- .Files.Get "dashboard.json" | indent 4 }}
     {{- end }}
