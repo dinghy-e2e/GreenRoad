@@ -67,6 +67,11 @@ chomd 400 keypair.pem
 ```sh
 ssh -i keypair.pem ubuntu@<public_dns>
 ```
+- yes and enter
+![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/2cea06f2-fa23-4548-9ea6-f2191b6f73e1)
+
+
+
 - We can copy the public dns ip from terrafrom terminal or aws ui
 
 ![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/3ce43bb0-54f5-4c64-a540-d266be59c0f9)
@@ -78,14 +83,14 @@ ssh -i keypair.pem ubuntu@<public_dns>
 - Create dashboard token
 
 ```sh
- kubectl -n kubernetes-dashboard create token admin-user
+ sudo kubectl -n kubernetes-dashboard create token admin-user
 ```
 ![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/ae5313a7-c449-4c9b-9418-67b7609c4982)
 
 
 Note:
 
-Clean up option for admin user
+- Clean up option for admin user
 
 ```sh
 kubectl -n kubernetes-dashboard delete serviceaccount admin-user
@@ -95,3 +100,9 @@ kubectl -n kubernetes-dashboard delete clusterrolebinding admin-user
 ```sh
  terraform output private_pem
 ```
+
+- If you see this message add https://
+
+![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/74df4713-fa3d-40b7-8c7b-795c52a8f238)
+
+
