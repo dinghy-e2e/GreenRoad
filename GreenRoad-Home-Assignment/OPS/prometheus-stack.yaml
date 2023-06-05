@@ -59,7 +59,7 @@ data:
         metrics_path: /
         static_configs:
           - targets: ['public_ip:31234']
-      - job_name: 'node_exporter'
+      - job_name: 'node'
         static_configs:
           - targets: ['public_ip:30003']
 
@@ -87,37 +87,22 @@ metadata:
   name: grafana-dashboards
   namespace: greenroad
 data:
-  web-status-dashboard.json: |
-    {
-      "dashboard": {
-        "id": null,
-        "title": "Web Status",
-        "panels": [
-          {
-            "title": "HTTP Status Code",
-            "type": "graph",
-            "datasource": "Prometheus",
-            "targets": [
-              {
-                "expr": "http_status_code",
-                "legendFormat": "Status Code"
-              }
-            ],
-            "yaxes": [
-              {
-                "format": "short"
-              },
-              {}
-            ]
-          }
-        ],
-        "refresh": "10s",
-        "schemaVersion": 22,
-        "version": 0
-      },
-      "folderId": null,
-      "overwrite": false
-    }
+  web-status-dashboard.json: |-
+    {{- if .Files.Exists "dashboard.json" }}
+    {{- .Files.Get "dashboard.json" | indent 4 }}
+    {{- end }}
+  grafana.ini: |
+    [server]
+    root_url = %(protocol)s://%(domain)s:%(http_port)s/
+    [datasources]
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://public_ip:30001
+        basicAuth: false
 
 ---
 
