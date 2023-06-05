@@ -59,6 +59,9 @@ data:
         metrics_path: /
         static_configs:
           - targets: ['public_ip:31234']
+      - job_name: 'node_exporter'
+        static_configs:
+          - targets: ['public_ip:30003']
 
 ---
 
