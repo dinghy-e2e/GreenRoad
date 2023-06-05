@@ -53,6 +53,12 @@ Apply complete result:
 - Make a new file(keypair.pem)
 
 ```sh
+touch keypair.pem
+```
+
+- Then run outpout command for RAS key
+
+```sh
  terraform output private_pem
 ```
 - Copy RSA PRIVATE KEY into keypair.pem and save
