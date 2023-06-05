@@ -9,10 +9,21 @@
 
 # Terraform Steps : 
 
-Aws premmision:
+Clone Iac repo
+
+``sh
+git clone https://github.com/dinghy-e2e/GreenRoad.git
+```
+Navigate to GreenRoad\GreenRoad-Home-Assignment
+
+Aws permission:
 
 ```sh
-aws configure
+$ aws configure
+AWS Access Key ID [None]: accesskey
+AWS Secret Access Key [None]: secretkey
+Default region name [None]: region e.x = us-west-2
+Default output format [None]: json
 ```
 
 Terraform commands:
@@ -32,7 +43,8 @@ terraform apply -auto-approve
 ```
 Apply complete result:
 
-![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/be5a8055-4961-4637-9d43-d6764daee5a2)
+![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/a5ee67d0-91cb-42fd-90f5-25094dfc553f)
+
 
 # Login to kubernetes dashboard
 
