@@ -73,14 +73,13 @@ chomd 400 keypair.pem
 ```sh
 ssh -i keypair.pem ubuntu@<public_dns>
 ```
-- yes and enter
-![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/2cea06f2-fa23-4548-9ea6-f2191b6f73e1)
-
-
-
 - We can copy the public dns ip from terrafrom terminal or aws ui
 
 ![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/3ce43bb0-54f5-4c64-a540-d266be59c0f9)
+
+- yes and enter
+![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/2cea06f2-fa23-4548-9ea6-f2191b6f73e1)
+
 
 - After login we need to create token 
 
