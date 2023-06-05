@@ -9,13 +9,13 @@ output "private_pem" {
 }
 
 output "public_web_app" {
-  value = "${aws_instance.ec2.public_dns}:31234 2048-web app"
+  value = "${aws_instance.ec2.public_dns}:31234 2048 web app"
 }
 
 output "public_grafana" {
-  value = "${aws_instance.ec2.public_dns}:30002 grafana"
+  value = "${aws_instance.ec2.public_dns}:30005 Dashboard"
 }
 
-output "public_prometheus" {
-  value = "${aws_instance.ec2.public_dns}:30001 prometheus"
-}
+# output "public_prometheus" {
+#   value = "${aws_instance.ec2.public_dns}:30001 prometheus"
+# }
