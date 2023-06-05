@@ -71,6 +71,10 @@ ssh -i keypair.pem ubuntu@<public_dns>
 
 ![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/3ce43bb0-54f5-4c64-a540-d266be59c0f9)
 
+- After login we need to create token 
+
+
+
 - Create dashboard token
 
 ```sh
