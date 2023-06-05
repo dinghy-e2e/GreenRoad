@@ -48,35 +48,36 @@ Apply complete result:
 
 # Login to kubernetes dashboard
 
-- Now we need to login into our ec2 for create token
+- Now we need to login into our ec2 for create token -
 
-make a new file(keypair.pem)
+- Make a new file(keypair.pem)
 
 ```sh
  terraform output private_pem
 ```
-Copy RSA PRIVATE KEY into keypair.pem and save
+- Copy RSA PRIVATE KEY into keypair.pem and save
 
-Run chmod for permission
+- Run chmod for permission
 
 ```sh
 chomd 400 keypair.pem
 ```
-SSH login command for creating token 
+- SSH login command for creating token 
 
 ```sh
 ssh -i keypair.pem ubuntu@<public_dns>
 ```
-** Wecan copy the public dns ip from terrafrom terminal or aws ui
+- We can copy the public dns ip from terrafrom terminal or aws ui
+- 
+![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/3ce43bb0-54f5-4c64-a540-d266be59c0f9)
 
-Create token for login
+- Create dashboard token
 
 ```sh
  kubectl -n kubernetes-dashboard create token admin-user
 ```
 ![image](https://github.com/dinghy-e2e/GreenRoad/assets/103927731/ae5313a7-c449-4c9b-9418-67b7609c4982)
 
-Now we need to login into our ec2 for create token
 
 Note:
 
