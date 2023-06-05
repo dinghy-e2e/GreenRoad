@@ -10,19 +10,41 @@ resource "aws_security_group" "itay-zrihan-sg-ec2-instance" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    from_port   = 30001
-    to_port     = 30001
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  # ingress {
+  #   from_port   = 30001
+  #   to_port     = 30001
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
   
-  ingress {
-    from_port   = 30002
-    to_port     = 30002
+  # ingress {
+  #   from_port   = 30002
+  #   to_port     = 30002
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
+
+  #   ingress {
+  #   from_port   = 30003
+  #   to_port     = 30003
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
+
+  #     ingress {
+  #   from_port   = 30004
+  #   to_port     = 30004
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
+
+      ingress {
+    from_port   = 30005
+    to_port     = 30005
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
 
   ingress {
     from_port   = 22
