@@ -22,22 +22,23 @@ curl -sfL https://get.k3s.io | sh -
 # mv linux-amd64/helm /usr/local/bin
 # rm helm*
 
-#//// Install Services (Prometheus, Node exporter, Grafana, 2048 game) ////#
+#//// Install Services (K8s Dashboard, 2048 game) ////#
 
 kubectl create ns greenroad
 
 
-#//// keycloak ////#
+#//// 2048 ////#
 git clone https://github.com/dinghy-e2e/GreenRoad.git
 
 kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/2048.yaml
 
 #//// Monitoring install ///#
 
-# replacing url
-public_ip=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
-sed -i "s/public_ip/$public_ip/g" /GreenRoad/GreenRoad-Home-Assignment/OPS/prometheus-stack.yaml
+kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/k8s-dashboard.yaml
 
-kubectl create configmap -n greenroad grafana-dashboards --from-file=/GreenRoad/GreenRoad-Home-Assignment/OPS/dashboard.json
 
-kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/prometheus-stack.yaml
+# # replacing url
+# public_ip=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+# sed -i "s/public_ip/$public_ip/g" /GreenRoad/GreenRoad-Home-Assignment/OPS/prometheus-stack.yaml
+# kubectl create configmap -n greenroad grafana-dashboards --from-file=/GreenRoad/GreenRoad-Home-Assignment/OPS/dashboard.json
+# kubectl apply -f /GreenRoad/GreenRoad-Home-Assignment/OPS/prometheus-stack.yaml
